@@ -1,0 +1,545 @@
+
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+        <link rel="stylesheet" href="style.css">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+		<title>Final Project</title>
+	</head>
+	<body>
+
+
+        <div class="main">
+
+            <div class="instructions">
+
+            </div>
+
+            <div id="render">
+
+                <p class="overlap">1. Scroll to explore space</p>
+                <p class="overlap">2. Use buttons below to navigate to specific objects</p>
+                <p class="overlap">3. Click on objects to view descriptions</p>
+                <p class="overlap">4. Click, hold and move to rotate camera</p>
+
+
+            </div>
+
+            <div class="information">
+                
+
+                <button type="button" class="btn btn-secondary" id="mercury">Mercury</button>
+                <button type="button" class="btn btn-secondary" id="venus">Venus</button>
+                <button type="button" class="btn btn-secondary" id="earth">Earth</button>
+                <button type="button" class="btn btn-secondary" id="mars">Mars</button>
+                <button type="button" class="btn btn-secondary" id="jupiter">Jupiter</button>
+                <button type="button" class="btn btn-secondary" id="saturn">Saturn</button>
+                <button type="button" class="btn btn-secondary" id="asteroidbelt">Asteroid Belt</button>
+                <button type="button" class="btn btn-primary" id="nasa">NASA Pic Of The Day</button>
+
+            </div>
+
+            <div class="descriptions">
+                
+            </div>
+
+
+        </div>
+
+		<script src="js/three.js"></script>
+        <script src="//cdn.rawgit.com/mrdoob/three.js/master/examples/js/controls/OrbitControls.js"></script>
+        <script src="js/threex.domevents.js"></script>
+             
+		<script>
+
+            //Query selectors for buttons
+
+            const mercurybutton = document.querySelector('#mercury');
+            const venusbutton = document.querySelector('#venus');
+            const earthbutton = document.querySelector('#earth');
+            const marsbutton = document.querySelector('#mars');
+            const jupiterbutton = document.querySelector('#jupiter');
+            const saturnbutton = document.querySelector('#saturn');
+            const asteroidbutton = document.querySelector("#asteroidbelt");
+            const planetdescriptions = document.querySelector(".descriptions")
+            const nasabutton = document.querySelector("#nasa")
+
+            const endpoint = "https://api.nasa.gov/planetary/apod?api_key=gTQYxfQxjPBzSJxEzm9XtAUEVDETlX7nXMsuUuoT";
+
+            nasabutton.addEventListener("click", () => {
+
+                planetdescriptions.innerHTML="";
+                getApiData(endpoint);
+
+            })
+
+            function getApiData(url) {
+
+                fetch(url)
+                .then((response) => response.json())
+                .then((data) => {
+                    console.log(data);
+                    displayData(data)
+                    // This invokes the callback that updates the page.
+                    
+                }, (err) => {
+                    console.error(err);
+                });
+
+               
+
+            }
+
+            function displayData(data) {
+
+                planetdescriptions.innerHTML += data.title;
+                planetdescriptions.innerHTML +=" on " + data.date;
+                planetdescriptions.innerHTML += `<img class="width" src="${data.url}"/>`
+
+            }
+
+
+
+            function getData(callback) {
+            fetch("./data.json")
+            .then((response) => response.json())
+            .then((data) => {
+                // console.log(data);
+                // This invokes the callback that updates the page.
+                callback(data);
+            }, (err) => {
+                console.error(err);
+            });
+
+        }
+
+        //Display data from all planets
+
+        function getMercuryData(data) {
+
+            mercuryData = data[0];
+            console.log(mercuryData);
+
+            const keys = Object.keys(mercuryData);
+            planetdescriptions.innerHTML = `<h1>Mercury</h1>`
+
+            keys.forEach((key, index) => {
+                planetdescriptions.innerHTML += `<li>${key}: ${mercuryData[key]}</li>`;
+                console.log(`${key}: ${mercuryData[key]}`);
+            });
+            
+
+        }
+
+        function getVenusData(data) {
+        
+            venusData = data[1];
+            console.log(venusData)
+            // console.log(mercuryData);
+
+            const keys = Object.keys(venusData);
+            planetdescriptions.innerHTML = `<h1>Venus</h1>`
+
+            keys.forEach((key, index) => {
+                planetdescriptions.innerHTML += `<li>${key}: ${venusData[key]}`;
+                console.log(`${key}: ${venusData[key]}`);
+            });
+
+    }
+
+        function getEarthData(data) {
+
+            earthData = data[2];
+            // console.log(mercuryData);
+
+            const keys = Object.keys(earthData);
+            planetdescriptions.innerHTML = `<h1>Earth</h1>`
+
+            keys.forEach((key, index) => {
+                planetdescriptions.innerHTML += `<li>${key}: ${earthData[key]}`;
+                console.log(`${key}: ${earthData[key]}`);
+            });
+
+
+    } 
+
+        function getMarsData(data) {
+
+            marsData = data[3];
+            // console.log(mercuryData);
+
+            const keys = Object.keys(marsData);
+            planetdescriptions.innerHTML = `<h1>Mars</h1>`
+
+            keys.forEach((key, index) => {
+                planetdescriptions.innerHTML += `<li>${key}: ${marsData[key]}`;
+                console.log(`${key}: ${marsData[key]}`);
+            });
+
+}
+
+        function getJupiterData(data) {
+
+            jupiterData = data[4];
+            // console.log(mercuryData);
+
+            const keys = Object.keys(jupiterData);
+            planetdescriptions.innerHTML = `<h1>Jupiter</h1>`
+
+            keys.forEach((key, index) => {
+                planetdescriptions.innerHTML += `<li>${key}: ${jupiterData[key]}`;
+                console.log(`${key}: ${jupiterData[key]}`);
+            });
+
+            }
+
+            function getSaturnData(data) {
+
+                saturnData = data[5];
+                // console.log(mercuryData);
+
+                const keys = Object.keys(saturnData);
+                planetdescriptions.innerHTML = `<h1>Saturn</h1>`
+
+                keys.forEach((key, index) => {
+                    planetdescriptions.innerHTML += `<li>${key}: ${saturnData[key]}`;
+                    console.log(`${key}: ${saturnData[key]}`);
+                });
+
+                }
+
+            //THREE JS STARTS HERE
+
+            const scene = new THREE.Scene(); 
+
+            //Make sure aspect ratio is accurate with middle two values (height half of width)
+            const camera = new THREE.PerspectiveCamera( 75, 1200 / 600, 0.1, 1000 );
+
+            //set alpha to true and use the set clear color property to set background image
+            const renderer = new THREE.WebGLRenderer({alpha: true });
+            renderer.setClearColor( 0x000000, 0 );
+            // renderer.setSize( window.innerWidth, window.innerHeight );
+            renderer.setSize( 1200, 600 );
+            document.body.appendChild( renderer.domElement );
+            document.querySelector('#render').appendChild( renderer.domElement )
+
+            const controls = new THREE.OrbitControls( camera, renderer.domElement );
+            controls.maxDistance = 16000;
+            controls.zoomSpeed = 0.02;
+            controls.rotateSpeed = 0.01;
+
+            // const planegeometry = new THREE.PlaneGeometry( 1, 1 );
+            // const planematerial = new THREE.MeshBasicMaterial( {color: 0xffff00, side: THREE.DoubleSide} );
+            // const plane = new THREE.Mesh( planegeometry, planematerial );
+            // scene.add( plane );
+            // plane.position.z = 10499;
+
+
+            camera.position.z = 10500;
+
+            //Camera positions change as per user clicked buttons 
+
+            mercurybutton.addEventListener("click", () => {
+                planetdescriptions.innerHTML = "";
+                camera.position.z = 9600;
+                camera.position.x = -30;
+                camera.position.y = -10;    
+
+            })
+
+            venusbutton.addEventListener("click", () => {
+                planetdescriptions.innerHTML = "";
+                camera.position.z = 8600;
+
+            })
+
+            earthbutton.addEventListener("click", () => {
+                planetdescriptions.innerHTML = "";
+                camera.position.z = 7600;
+
+            })
+
+            marsbutton.addEventListener("click", () => {
+                planetdescriptions.innerHTML = "";
+                camera.position.z = 6600;
+
+            })
+
+            jupiterbutton.addEventListener("click", () => {
+                planetdescriptions.innerHTML = "";
+                camera.position.z = 3600;
+
+            })
+
+            saturnbutton.addEventListener("click", () => {
+                planetdescriptions.innerHTML = "";
+                camera.position.z = 600;
+
+            })
+
+            asteroidbutton.addEventListener("click", () => {
+                planetdescriptions.innerHTML = "";
+                camera.position.z = 5200;
+
+            })
+
+
+
+                        const curve = new THREE.EllipseCurve(
+                -15,  0,            // ax, aY
+                10, 30,           // xRadius, yRadius
+                0,  2 * Math.PI,  // aStartAngle, aEndAngle
+                false,            // aClockwise
+                1                // aRotation
+            );
+
+            const ringpoints = curve.getPoints( 100 );
+            const ringgeometry = new THREE.BufferGeometry().setFromPoints( ringpoints );
+
+            const saturnmaterial = new THREE.LineBasicMaterial( { color: 'gold' } );
+
+// Create the final object to add to the scene
+            const ellipse = new THREE.Line( ringgeometry, saturnmaterial );
+            const ellipsetwo = new THREE.Line( ringgeometry, saturnmaterial );
+            ellipsetwo.position.y = 2;
+            ellipse.position.y = 1;
+            ellipse.position.z = 500;
+            ellipsetwo.position.z = 500;
+            ellipse.position.x = 2;
+            ellipsetwo.position.x = 2;
+
+           
+            const geometry = new THREE.SphereGeometry(15, 32, 16);
+            const material = new THREE.MeshNormalMaterial( { wireframe: true } );
+
+            //Mercury Sphere
+
+            const texturefour = new THREE.TextureLoader().load( 'mercury.jpeg' );
+            mercurymaterial = new THREE.MeshBasicMaterial( { map: texturefour } );
+
+            const spherefour = new THREE.Mesh( geometry, mercurymaterial );
+            spherefour.position.z = 9500;
+            spherefour.position.x = -30;
+            spherefour.position.y = -10;
+
+            //Venus Sphere
+
+            const texturefive = new THREE.TextureLoader().load( 'venus.jpg' );
+            venusmaterial = new THREE.MeshBasicMaterial( { map: texturefive } );
+
+            const spherefive = new THREE.Mesh( geometry, venusmaterial );
+            spherefive.position.z = 8500;
+            spherefive.position.x = 80;
+            spherefive.position.y = -20;
+
+            //Earth Sphere
+
+            const texture = new THREE.TextureLoader().load( 'earth.jpeg' );
+            earthmaterial = new THREE.MeshBasicMaterial( { map: texture } );
+
+            const spherethree = new THREE.Mesh( geometry, earthmaterial );
+            spherethree.position.z = 7500;
+            spherethree.position.x = 0;
+            spherethree.position.y = 20;
+
+            //Mars Sphere
+
+            const texturesix = new THREE.TextureLoader().load( 'mars.jpeg' );
+            marsmaterial = new THREE.MeshBasicMaterial( { map: texturesix } );
+
+            const spheresix = new THREE.Mesh( geometry, marsmaterial );
+            spheresix.position.z = 6500;
+            spheresix.position.x = 10;
+            spheresix.position.y = -10;
+
+            //Jupiter sphere
+
+            const texturetwo = new THREE.TextureLoader().load( 'jupiter.jpeg' );
+            jupitermaterial = new THREE.MeshBasicMaterial( { map: texturetwo } );
+
+            const spheretwo = new THREE.Mesh( geometry, jupitermaterial );
+            spheretwo.position.z = 3500;
+            spheretwo.position.x = 60;
+
+            //Saturn sphere
+
+            const texturethree = new THREE.TextureLoader().load( 'saturn.jpg' );
+            saturn_material = new THREE.MeshBasicMaterial( { map: texturethree } );
+            const sphereone = new THREE.Mesh( geometry, saturn_material );
+            sphereone.position.z = 500;
+            sphereone.position.x = -15;
+
+            //Asteroid belt
+
+            var astgeometry = new THREE.DodecahedronGeometry(40,0);
+            const textureast = new THREE.TextureLoader().load( 'asteroid.jpeg' );
+            astmaterial = new THREE.MeshBasicMaterial( { map: textureast } );
+
+            for (var i=0; i<3; i++) {
+
+            var ast = new THREE.Mesh( astgeometry, astmaterial );
+            ast.position.x -= i*100;
+            ast.position.z = 5000;
+            ast.position.y += i*20;
+            scene.add( ast );
+
+            }
+
+            //To add all objects to the scene
+
+            scene.add( sphereone );
+            scene.add( spheretwo );
+            scene.add( spherethree );
+            scene.add( spherefour );
+            scene.add( spherefive );
+            scene.add( spheresix );
+            scene.add( ellipse );
+            scene.add( ellipsetwo );
+
+
+        const domEvent = new THREEx.DomEvents(camera, renderer.domElement);
+
+        //Planet Event Listeners
+
+        domEvent.addEventListener(spherefour, 'mouseover', event => {
+                
+                spherefour.scale.set(1.5,1.5,1.5)
+
+                    domEvent.addEventListener(spherefour, 'mouseout', event => {
+                        
+                        spherefour.scale.set(1,1,1)
+                        // scene.remove( plane );
+
+                    }, false )
+
+            }, false )
+
+            domEvent.addEventListener(spherefour, 'click', event => {
+                planetdescriptions.innerHTML = "";
+                getData(getMercuryData);
+
+            }, false )
+
+            domEvent.addEventListener(spherefive, 'mouseover', event => {
+                
+                spherefive.scale.set(1.5,1.5,1.5)
+
+                    domEvent.addEventListener(spherefive, 'mouseout', event => {
+                        
+                        spherefive.scale.set(1,1,1)
+                        // scene.remove( plane );
+
+                    }, false )
+
+            }, false )
+
+            domEvent.addEventListener(spherefive, 'click', event => {
+                planetdescriptions.innerHTML = "";
+                getData(getVenusData);
+
+            }, false )
+
+
+            domEvent.addEventListener(spherethree, 'mouseover', event => {
+                
+                spherethree.scale.set(1.5,1.5,1.5)
+
+                    domEvent.addEventListener(spherethree, 'mouseout', event => {
+                        
+                        spherethree.scale.set(1,1,1)
+                        // scene.remove( plane );
+
+                    }, false )
+
+            }, false )
+
+            domEvent.addEventListener(spherethree, 'click', event => {
+                planetdescriptions.innerHTML = "";
+                getData(getEarthData);
+
+            }, false )
+            
+            domEvent.addEventListener(spheresix, 'mouseover', event => {
+                
+                spheresix.scale.set(1.5,1.5,1.5)
+
+                    domEvent.addEventListener(spheresix, 'mouseout', event => {
+                        
+                        spheresix.scale.set(1,1,1)
+                        // scene.remove( plane );
+
+                    }, false )
+
+            }, false )
+
+            domEvent.addEventListener(spheresix, 'click', event => {
+                planetdescriptions.innerHTML = "";
+                getData(getMarsData);
+
+            }, false )  
+
+            domEvent.addEventListener(spheretwo, 'mouseover', event => {
+                
+                spheretwo.scale.set(1.5,1.5,1.5)
+
+                    domEvent.addEventListener(spheretwo, 'mouseout', event => {
+                        
+                        spheretwo.scale.set(1,1,1)
+                        // scene.remove( plane );
+
+                    }, false )
+
+            }, false )
+
+            domEvent.addEventListener(spheretwo, 'click', event => {
+                planetdescriptions.innerHTML = "";
+                getData(getJupiterData);
+
+            }, false )  
+
+            domEvent.addEventListener(sphereone, 'mouseover', event => {
+                
+                sphereone.scale.set(1.5,1.5,1.5)
+
+                    domEvent.addEventListener(sphereone, 'mouseout', event => {
+                        
+                        sphereone.scale.set(1,1,1)
+                        // scene.remove( plane );
+
+                    }, false )
+
+            }, false )
+
+            domEvent.addEventListener(sphereone, 'click', event => {
+                planetdescriptions.innerHTML = "";
+                getData(getSaturnData);
+
+            }, false )  
+
+            //Create spheres here
+
+    
+
+            function animate() {
+            requestAnimationFrame( animate );
+            sphereone.rotation.y += 0.01;
+            spheretwo.rotation.y += 0.01;
+            spherethree.rotation.y += 0.01;
+            spherefour.rotation.y += 0.01;
+            spherefive.rotation.y += 0.01;
+            spheresix.rotation.y += 0.01;
+            renderer.render( scene, camera );
+            controls.update();           
+
+
+            
+}
+animate();
+
+		</script>
+
+
+
+	</body>
+</html>

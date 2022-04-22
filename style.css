@@ -1,0 +1,64 @@
+html {
+    
+    background-color: black;
+}
+
+body {
+
+    margin:0px;
+    width: 2000px;
+    background-color: black;
+    /* background-image: url('./stars2.png'); */
+}
+
+.main {
+    width: 100%;
+    background-color: black;  
+}
+
+.dashboard {
+    width: 100%;
+    height: 300px;
+    background-color: blue;
+    /* background-image: url('./stars2.png'); */
+}
+
+#render {
+    width: 1200px;
+    height: 600px;
+    background-color: black;
+    background-image: url('./stars2.png');
+}
+
+
+.information {
+
+    padding-top: 30px;
+    padding-bottom: 30px;
+    padding-left: 250px;
+    background-color: black;
+}
+
+.descriptions {
+    width: 1200px;
+    padding-left: 250px;
+    padding-bottom: 20px;
+    z-index: 10;
+    color: white;
+    border: 1px white solid;
+}
+
+.weight {
+    margin-top: 30px;
+    padding-left: 250px;
+    color: white;
+}
+
+.overlap {
+    z-index: 1;
+    color: aliceblue;
+}
+
+.width {
+    width: 800px;
+}

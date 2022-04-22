@@ -1,0 +1,67 @@
+[
+	{"Position": "1",
+	 "Diameter (km)": "4879",
+	 "Density": "5429",
+	 "Distance from Sun": "57.9",
+	 "Mass": "0.330",
+	 "Gravity": "3.7",
+	 "Moons": "0",
+	 "Escape Velocity": "4.3 km/s",
+	 "Mean Temperature in Celsius": "167"
+	},
+	{"Position": "2",
+	 "Diameter (km)": "12104",
+	 "Density": "5243",
+	 "Distance from Sun": "108.2",
+	 "Mass": "4.87",
+	 "Gravity": "8.9",
+	 "Moons": "0",
+	 "Escape Velocity": "10.4 km/s",
+	 "Mean Temperature in Celsius": "464"
+	 
+	},
+	{"Position": "3",
+	 "Diameter (km)": "12756",
+	 "Density": "5514",
+	 "Distance from Sun": "149.6",
+	 "Mass": "5.97",
+	 "Gravity": "9.8",
+	 "Moons": "1",
+	 "Escape Velocity": "11.2 km/s",
+	 "Mean Temperature in Celsius": "15"
+	 
+	},
+	{"Position": "4",
+	 "Diameter (km)": "6792",
+	 "Density": "3934",
+	 "Distance from Sun": "228",
+	 "Mass": "0.642",
+	 "Gravity": "3.7",
+	 "Moons": "2",
+	 "Escape Velocity": "5",
+	 "Mean Temperature in Celsius": "-65"
+	
+	},
+	{"Position": "5",
+	 "Diameter (km)": "142984",
+	 "Density": "1326",
+	 "Distance from Sun": "778.5",
+	 "Mass": "1898",
+	 "Gravity": "23.1",
+	 "Moons": "79",
+	 "Escape Velocity": "59.5",
+	 "Mean Temperature in Celsius": "-110"	
+	},
+	{"Position": "6",
+	 "Diameter (km)": "120536",
+	 "Density": "687",
+	 "Distance from Sun": "1432",
+	 "Mass": "568",
+	 "Gravity": "9.0",
+	 "Moons": "82",
+	 "Escape Velocity": "35.5",
+	 "Mean Temperature in Celsius": "-140"	
+	 
+	}
+	
+]
